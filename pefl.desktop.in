@@ -1,8 +1,0 @@
-[Desktop Entry]
-_Name=pefl
-Exec="run_config.sh"
-Icon=assets/logo.svg
-Terminal=false
-Type=Application
-X-Lomiri-Touch=true
-X-Lomiri-XMir-Enable=true

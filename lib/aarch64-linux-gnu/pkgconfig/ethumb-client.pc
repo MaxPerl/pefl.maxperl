@@ -1,0 +1,12 @@
+prefix=/opt/click.ubuntu.com/pefl.maxperl/current
+includedir=${prefix}/include
+libdir=${prefix}/lib/aarch64-linux-gnu
+
+Name: ethumb-client
+Description: efl: ethumb_client
+Version: 1.28.1
+Requires: eina, eo, efl, ethumb
+Requires.private: eldbus, ecore
+Libs: -L${libdir} -lethumb_client
+Libs.private: -lm -pthread -ldl
+Cflags: -I${includedir}/ethumb-client-1

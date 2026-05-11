@@ -1,0 +1,12 @@
+prefix=/opt/click.ubuntu.com/pefl.maxperl/current
+includedir=${prefix}/include
+libdir=${prefix}/lib/aarch64-linux-gnu
+
+Name: elput
+Description: efl: elput
+Version: 1.28.1
+Requires: eina, eldbus
+Requires.private: eo, efl, ecore, ecore-input, eeze, ecore-file, libinput >= 1.7.0, xkbcommon >= 0.3.0, libudev >= 148
+Libs: -L${libdir} -lelput
+Libs.private: -lm -pthread -ldl
+Cflags: -I${includedir}/elput-1

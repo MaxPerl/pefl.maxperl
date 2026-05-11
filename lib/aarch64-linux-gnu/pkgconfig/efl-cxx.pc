@@ -1,0 +1,11 @@
+prefix=/opt/click.ubuntu.com/pefl.maxperl/current
+includedir=${prefix}/include
+libdir=${prefix}/lib/aarch64-linux-gnu
+
+Name: efl-cxx
+Description: Efl cxx bindings
+Version: 1.28.1
+Requires: eina-cxx, eolian-cxx, eo-cxx, efl
+Requires.private: eo, eina, eolian
+Libs.private: -pthread -lm -lrt -ldl
+Cflags: -I${includedir}/efl-cxx-1 -I${includedir}/efl-cxx-1 -I${includedir}/efl-cxx-1/interfaces

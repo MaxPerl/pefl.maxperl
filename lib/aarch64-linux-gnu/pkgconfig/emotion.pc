@@ -1,0 +1,12 @@
+prefix=/opt/click.ubuntu.com/pefl.maxperl/current
+includedir=${prefix}/include
+libdir=${prefix}/lib/aarch64-linux-gnu
+
+Name: emotion
+Description: efl: emotion
+Version: 1.28.1
+Requires: eina, eo, efl
+Requires.private: ecore, eet, emile, evas, ector, eio, eeze, ecore-file
+Libs: -L${libdir} -lemotion
+Libs.private: -lm -pthread -ldl
+Cflags: -I${includedir}/emotion-1

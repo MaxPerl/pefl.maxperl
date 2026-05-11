@@ -1,0 +1,12 @@
+prefix=/opt/click.ubuntu.com/pefl.maxperl/current
+includedir=${prefix}/include
+libdir=${prefix}/lib/aarch64-linux-gnu
+
+Name: eeze
+Description: efl: eeze
+Version: 1.28.1
+Requires: eina, efl, ecore, ecore-file
+Requires.private: eo, mount, libudev >= 148
+Libs: -L${libdir} -leeze
+Libs.private: -pthread -lm -ldl
+Cflags: -I${includedir}/eeze-1

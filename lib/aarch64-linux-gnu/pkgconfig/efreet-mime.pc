@@ -1,0 +1,12 @@
+prefix=/opt/click.ubuntu.com/pefl.maxperl/current
+includedir=${prefix}/include
+libdir=${prefix}/lib/aarch64-linux-gnu
+
+Name: efreet-mime
+Description: Deprecated, please just use efreet
+Version: 1.28.1
+Requires: eina, eo, efl
+Requires.private: eet, emile, ecore, ecore-con, ecore-file, ecore-ipc
+Libs: -L${libdir} -lefreet
+Libs.private: -lm -pthread -ldl
+Cflags: -I${includedir}/efreet-1

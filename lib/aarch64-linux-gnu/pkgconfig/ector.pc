@@ -1,0 +1,12 @@
+prefix=/opt/click.ubuntu.com/pefl.maxperl/current
+includedir=${prefix}/include
+libdir=${prefix}/lib/aarch64-linux-gnu
+
+Name: ector
+Description: efl: ector
+Version: 1.28.1
+Requires: eina, efl
+Requires.private: eo, emile, eet
+Libs: -L${libdir} -lector
+Libs.private: -lm -pthread -ldl
+Cflags: -I${includedir}/ector-1

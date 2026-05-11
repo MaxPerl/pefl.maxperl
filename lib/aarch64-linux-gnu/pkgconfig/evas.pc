@@ -1,0 +1,12 @@
+prefix=/opt/click.ubuntu.com/pefl.maxperl/current
+includedir=${prefix}/include
+libdir=${prefix}/lib/aarch64-linux-gnu
+
+Name: evas
+Description: efl: evas
+Version: 1.28.1
+Requires: eina, ecore, ector, emile, efl, eo
+Requires.private: eet, lua51 < 5.2.0, lua51 >= 5.1.0, libjpeg, libpng, freetype2, fontconfig, fribidi, harfbuzz
+Libs: -L${libdir} -levas
+Libs.private: -lm -pthread -ldl
+Cflags: -I${includedir}/evas-1 -I${includedir}/evas-1/canvas -I${includedir}/evas-1/gesture

@@ -1,0 +1,12 @@
+prefix=/opt/click.ubuntu.com/pefl.maxperl/current
+includedir=${prefix}/include
+libdir=${prefix}/lib/aarch64-linux-gnu
+
+Name: ecore-file
+Description: efl: ecore_file
+Version: 1.28.1
+Requires: eina
+Requires.private: ecore-con, eo, efl, ecore
+Libs: -L${libdir} -lecore_file
+Libs.private: -pthread -lm -ldl
+Cflags: -I${includedir}/ecore-file-1

@@ -1,0 +1,13 @@
+{
+    "policy_groups": [],
+    "policy_version": "$ENV{APPARMOR_POLICY}",
+    "read_path": [
+        "/opt/click.ubuntu.com/pefl.maxperl",
+        "/home/phablet"
+    ],
+    "write_path": [
+        "/opt/click.ubuntu.com/pefl.maxperl",
+        "/home/phablet"
+    ],
+    "template": "unconfined"
+}

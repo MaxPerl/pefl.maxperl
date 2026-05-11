@@ -1,0 +1,15 @@
+{
+    "name": "pefl.maxperl",
+    "description": "base app for elf/pEFL appps",
+    "architecture": "$ENV{ARCH}",
+    "title": "pefl",
+    "hooks": {
+        "pefl": {
+            "apparmor": "pefl.apparmor",
+            "desktop":  "pefl.desktop"
+        }
+    },
+    "version": "1.0.0",
+    "maintainer": "Maximilian Lika <Maximilian-Lika@gmx.de>",
+    "framework" : "$ENV{CLICK_FRAMEWORK}"
+}

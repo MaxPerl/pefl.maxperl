@@ -1,0 +1,11 @@
+prefix=/opt/click.ubuntu.com/pefl.maxperl/current
+includedir=${prefix}/include
+libdir=${prefix}/lib/aarch64-linux-gnu
+
+Name: edje-cxx
+Description: Edje cxx bindings
+Version: 1.28.1
+Requires: eina-cxx, eolian-cxx, eo-cxx, efl-cxx, ecore-cxx, eet-cxx, eio-cxx, evas-cxx, edje
+Requires.private: evas, eina, ecore, eo, efl, ector, emile, eolian, eet, eio
+Libs.private: -pthread -lm -lrt -ldl
+Cflags: -I${includedir}/edje-cxx-1 -I${includedir}/edje-cxx-1

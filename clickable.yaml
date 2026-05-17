@@ -60,10 +60,11 @@ libraries:
             - libheif-dev
             - liblua5.1.0-dev
             - liblua5.1.0
+            - libxkbcommon-x11-dev
         builder: custom
         build:
             - tar xvf efl-1.28.1.tar.xz
-            - meson --cross-file "${SRC_DIR}/dist/lomiri-${ARCH_TRIPLET}.ini" --prefix=/ -Dbuild-tests=false -Dbindings="" -Dsdl=false build "${BUILD_DIR}/efl-1.28.1"
+            - meson --cross-file "${SRC_DIR}/dist/lomiri-${ARCH_TRIPLET}.ini" --prefix=/ -Dbuild-tests=false -Dbindings="" -Dwl=true -Ddrm=true build "${BUILD_DIR}/efl-1.28.1"
             - ninja -C build
             - env DESTDIR="${INSTALL_DIR}" ninja -C build install
             #- wget https://download.enlightenment.org/rel/libs/efl/efl-1.28.1.tar.xz
@@ -82,6 +83,13 @@ install_data:
         $EFL_LIB_INSTALL_DIR/lib/elementary/modules/test_map/v-1.28/module.so : lib/aarch64-linux-gnu/elementary/modules/test_map/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/elementary/modules/web/none/v-1.28/module.so : lib/aarch64-linux-gnu/elementary/modules/web/none/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/evas/modules/engines/buffer/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/engines/buffer/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/evas/modules/engines/drm/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/engines/drm/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/evas/modules/engines/gl_drm/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/engines/gl_drm/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/evas/modules/engines/gl_generic/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/engines/gl_generic/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/evas/modules/engines/gl_x11/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/engines/gl_x11/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/evas/modules/engines/software_x11/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/engines/software_x11/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/evas/modules/engines/wayland_egl/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/engines/wayland_egl/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/evas/modules/engines/wayland_shm/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/engines/wayland_shm/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/bmp/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/bmp/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/generic/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/generic/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/gif/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/gif/v-1.28
@@ -99,10 +107,14 @@ install_data:
         $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_savers/webp/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_savers/webp/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/ecore/system/systemd/v-1.28/module.so : lib/aarch64-linux-gnu/ecore/system/systemd/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/ecore/system/upower/v-1.28/module.so : lib/aarch64-linux-gnu/ecore/system/upower/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/ecore_evas/engines/extn/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_evas/engines/extn/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/ecore_evas/engines/drm/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_evas/engines/extn/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/ecore_evas/engines/extn/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_evas/engines/drm/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/ecore_evas/engines/wayland/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_evas/engines/wayland/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/ecore_evas/engines/x/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_evas/engines/x/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/ecore_imf/modules/scim/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_imf/modules/scim/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/ecore_imf/modules/wayland/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_imf/modules/wayland/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/ecore_imf/modules/xim/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_imf/modules/xim/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/ecore_wl2/engines/dmabuf/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_wl2/engines/dmabuf/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/efreet/v-1.28/efreet_desktop_cache_create : lib/aarch64-linux-gnu/efreet/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/efreet/v-1.28/efreet_icon_cache_create : lib/aarch64-linux-gnu/efreet/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/efreet/v-1.28/efreet_mime_cache_create : lib/aarch64-linux-gnu/efreet/v-1.28
@@ -160,6 +172,9 @@ install_lib:
     - $EFL_LIB_INSTALL_DIR/lib/libefl.so.1.28.1
     - $EFL_LIB_INSTALL_DIR/lib/libefl.so.1
     - $EFL_LIB_INSTALL_DIR/lib/libefl.so
+    - $EFL_LIB_INSTALL_DIR/lib/libefl_canvas_wl.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libefl_canvas_wl.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libefl_canvas_wl.so
     - $EFL_LIB_INSTALL_DIR/lib/libeina.so.1.28.1
     - $EFL_LIB_INSTALL_DIR/lib/libeina.so.1
     - $EFL_LIB_INSTALL_DIR/lib/libeina.so
@@ -211,6 +226,9 @@ install_lib:
     - $EFL_LIB_INSTALL_DIR/lib/libecore_con.so.1.28.1
     - $EFL_LIB_INSTALL_DIR/lib/libecore_con.so.1
     - $EFL_LIB_INSTALL_DIR/lib/libecore_con.so
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_drm2.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_drm2.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_drm2.so
     - $EFL_LIB_INSTALL_DIR/lib/libecore_imf.so.1.28.1
     - $EFL_LIB_INSTALL_DIR/lib/libecore_imf.so.1
     - $EFL_LIB_INSTALL_DIR/lib/libecore_imf.so
@@ -220,6 +238,9 @@ install_lib:
     - $EFL_LIB_INSTALL_DIR/lib/libecore_ipc.so.1.28.1
     - $EFL_LIB_INSTALL_DIR/lib/libecore_ipc.so.1
     - $EFL_LIB_INSTALL_DIR/lib/libecore_ipc.so
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_wl2.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_wl2.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_wl2.so
     - $EFL_LIB_INSTALL_DIR/lib/libedje.so.1.28.1
     - $EFL_LIB_INSTALL_DIR/lib/libedje.so.1
     - $EFL_LIB_INSTALL_DIR/lib/libedje.so

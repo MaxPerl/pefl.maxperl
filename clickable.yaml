@@ -1,160 +1,252 @@
 clickable_minimum_required: 8.8.0
+framework: ubuntu-touch-24.04-1.x
 builder: cmake
 kill: pefl
 skip_review: true
+libraries:
+    efl:
+        dependencies_host:
+            - ninja-build
+            - meson
+            - build-essential
+            - check
+            - libc-bin
+            - libedje-bin
+            - libelementary-bin
+            - libeet-bin
+            - libeolian-bin
+        dependencies_target:
+            - libinput-dev 
+            - libssl-dev 
+            - libsystemd-dev 
+            - libjpeg-dev 
+            - libglib2.0-dev 
+            - libgstreamer1.0-dev 
+            - libfreetype-dev 
+            - libfontconfig-dev 
+            - libfribidi-dev 
+            - libavahi-client-dev 
+            - libharfbuzz-dev 
+            - libibus-1.0-dev 
+            - libx11-dev 
+            - libxext-dev 
+            - libxrender-dev 
+            - libgl1-mesa-dev 
+            - libopenjp2-7-dev 
+            - libwebp-dev 
+            - libgif-dev 
+            - libtiff5-dev 
+            - libpoppler-dev 
+            - libpoppler-cpp-dev 
+            - libspectre-dev 
+            - libraw-dev 
+            - librsvg2-dev 
+            - libudev-dev 
+            - libmount-dev 
+            - libdbus-1-dev 
+            - libpulse-dev 
+            - libsndfile1-dev 
+            - libxcursor-dev 
+            - libxcomposite-dev 
+            - libxinerama-dev 
+            - libxrandr-dev 
+            - libxtst-dev 
+            - libxss-dev 
+            - libgstreamer-plugins-base1.0-dev  
+            - libscim-dev 
+            - libxdamage-dev
+            - libwebp-dev 
+            - libunwind-dev 
+            - libheif-dev
+            - liblua5.1.0-dev
+            - liblua5.1.0
+        builder: custom
+        build:
+            - tar xvf efl-1.28.1.tar.xz
+            - meson --cross-file "${SRC_DIR}/dist/lomiri-${ARCH_TRIPLET}.ini" --prefix=/ -Dbuild-tests=false -Dbindings="" -Dsdl=false build "${BUILD_DIR}/efl-1.28.1"
+            - ninja -C build
+            - env DESTDIR="${INSTALL_DIR}" ninja -C build install
+            #- wget https://download.enlightenment.org/rel/libs/efl/efl-1.28.1.tar.xz
 dependencies_target:
-    - "liblua5.1.0-dev"
-install_bin:
-    - "bin/elementary_config"
-    - "bin/efreetd"
-    - "bin/diffeet"
-    - "bin/ecore_evas_convert"
-    - "bin/edje_cc"
-    - "bin/edje_codegen"
-    - "bin/edje_decc"
-    - "bin/edje_external_inspector"
-    - "bin/edje_inspector"
-    - "bin/edje_pick"
-    - "bin/edje_player"
-    - "bin/edje_recc"
-    - "bin/edje_watch"
-    - "bin/eet"
-    - "bin/eetpack"
-    - "bin/eeze_disk_ls"
-    - "bin/eeze_mount"
-    - "bin/eeze_scanner"
-    - "bin/eeze_scanner_monitor"
-    - "bin/eeze_umount"
-    - "bin/efl_debug"
-    - "bin/efl_debugd"
-    - "bin/eina_btlog"
-    - "bin/eina_modinfo"
-    - "bin/eldbus-codegen"
-    - "bin/elementary_codegen"
-    - "bin/elementary_perf"
-    - "bin/elementary_quicklaunch"
-    - "bin/elementary_run"
-    - "bin/elementary_test"
-    - "bin/elm_prefs_cc"
-    - "bin/embryo_cc"
-    - "bin/eo_debug"
-    - "bin/eolian_cxx"
-    - "bin/eolian_gen"
-    - "bin/ethumb"
-    - "bin/ethumbd"
-    - "bin/ethumbd_client"
-    - "bin/exactness"
-    - "bin/exactness_inject"
-    - "bin/exactness_play"
-    - "bin/exactness_record"
-    - "bin/vieet"
+    - liblua5.1.0-dev
+    - liblua5.1.0    
 install_root_data:
-    - "bin"
-    - "pEFL"
-    - "share"
     - "run_config.sh"
+    - "$EFL_LIB_INSTALL_DIR/bin/elementary_config"
 install_data:
-        lib/aarch64-linux-gnu/edje/modules/elm/v-1.28/module.so : lib/aarch64-linux-gnu/edje/modules/elm/v-1.28
-        lib/aarch64-linux-gnu/elementary/modules/prefs/v-1.28/module.so : lib/aarch64-linux-gnu/elementary/modules/prefs/v-1.28
-        lib/aarch64-linux-gnu/elementary/modules/access_output/v-1.28/module.so : lib/aarch64-linux-gnu/elementary/modules/access_output/v-1.28
-        lib/aarch64-linux-gnu/elementary/modules/test_entry/v-1.28/module.so : lib/aarch64-linux-gnu/elementary/modules/test_entry/v-1.28
-        lib/aarch64-linux-gnu/elementary/modules/test_map/v-1.28/module.so : lib/aarch64-linux-gnu/elementary/modules/test_map/v-1.28
-        lib/aarch64-linux-gnu/elementary/modules/web/none/v-1.28/module.so : lib/aarch64-linux-gnu/elementary/modules/web/none/v-1.28
-        lib/aarch64-linux-gnu/evas/modules/engines/buffer/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/engines/buffer/v-1.28
-        lib/aarch64-linux-gnu/evas/modules/image_loaders/bmp/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/bmp/v-1.28
-        lib/aarch64-linux-gnu/evas/modules/image_loaders/generic/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/generic/v-1.28
-        lib/aarch64-linux-gnu/evas/modules/image_loaders/gif/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/gif/v-1.28
-        lib/aarch64-linux-gnu/evas/modules/image_loaders/ico/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/ico/v-1.28
-        lib/aarch64-linux-gnu/evas/modules/image_loaders/pmaps/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/pmaps/v-1.28
-        lib/aarch64-linux-gnu/evas/modules/image_loaders/psd/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/psd/v-1.28
-        lib/aarch64-linux-gnu/evas/modules/image_loaders/tga/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/tga/v-1.28
-        lib/aarch64-linux-gnu/evas/modules/image_loaders/tgv/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/tgv/v-1.28
-        lib/aarch64-linux-gnu/evas/modules/image_loaders/tiff/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/tiff/v-1.28
-        lib/aarch64-linux-gnu/evas/modules/image_loaders/wbmp/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/wbmp/v-1.28
-        lib/aarch64-linux-gnu/evas/modules/image_loaders/webp/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/webp/v-1.28
-        lib/aarch64-linux-gnu/evas/modules/image_loaders/xpm/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/xpm/v-1.28
-        lib/aarch64-linux-gnu/evas/modules/image_savers/tgv/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_savers/tgv/v-1.28
-        lib/aarch64-linux-gnu/evas/modules/image_savers/tiff/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_savers/tiff/v-1.28
-        lib/aarch64-linux-gnu/evas/modules/image_savers/webp/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_savers/webp/v-1.28
-        lib/aarch64-linux-gnu/ecore/system/systemd/v-1.28/module.so : lib/aarch64-linux-gnu/ecore/system/systemd/v-1.28
-        lib/aarch64-linux-gnu/ecore/system/upower/v-1.28/module.so : lib/aarch64-linux-gnu/ecore/system/upower/v-1.28
-        lib/aarch64-linux-gnu/ecore_evas/engines/extn/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_evas/engines/extn/v-1.28
-        lib/aarch64-linux-gnu/ecore_evas/engines/x/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_evas/engines/x/v-1.28
-        lib/aarch64-linux-gnu/ecore_imf/modules/scim/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_imf/modules/scim/v-1.28
-        lib/aarch64-linux-gnu/ecore_imf/modules/xim/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_imf/modules/xim/v-1.28
-        lib/aarch64-linux-gnu/efreet/v-1.28/efreet_desktop_cache_create : lib/aarch64-linux-gnu/efreet/v-1.28
-        lib/aarch64-linux-gnu/efreet/v-1.28/efreet_icon_cache_create : lib/aarch64-linux-gnu/efreet/v-1.28
-        lib/aarch64-linux-gnu/efreet/v-1.28/efreet_mime_cache_create : lib/aarch64-linux-gnu/efreet/v-1.28
-        lib/aarch64-linux-gnu/edje/modules/emotion/v-1.28/module.so : lib/aarch64-linux-gnu/edje/modules/emotion/v-1.28
-        lib/aarch64-linux-gnu/emotion/modules/gstreamer1/v-1.28/module.so : lib/aarch64-linux-gnu/emotion/modules/gstreamer1/v-1.28
-        lib/aarch64-linux-gnu/ethumb/modules/emotion/v-1.28/module.so : lib/aarch64-linux-gnu/ethumb/modules/emotion/v-1.28
-        lib/aarch64-linux-gnu/eeze/modules/sensor/fake/v-1.28/module.so : lib/aarch64-linux-gnu/eeze/modules/sensor/fake/v-1.28
-        lib/aarch64-linux-gnu/eeze/modules/sensor/udev/v-1.28/module.so : lib/aarch64-linux-gnu/eeze/modules/sensor/udev/v-1.28
+        $EFL_LIB_INSTALL_DIR/share : ""
+        $EFL_LIB_INSTALL_DIR/lib/edje/modules/elm/v-1.28/module.so : lib/aarch64-linux-gnu/edje/modules/elm/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/elementary/modules/prefs/v-1.28/module.so : lib/aarch64-linux-gnu/elementary/modules/prefs/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/elementary/modules/access_output/v-1.28/module.so : lib/aarch64-linux-gnu/elementary/modules/access_output/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/elementary/modules/test_entry/v-1.28/module.so : lib/aarch64-linux-gnu/elementary/modules/test_entry/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/elementary/modules/test_map/v-1.28/module.so : lib/aarch64-linux-gnu/elementary/modules/test_map/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/elementary/modules/web/none/v-1.28/module.so : lib/aarch64-linux-gnu/elementary/modules/web/none/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/evas/modules/engines/buffer/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/engines/buffer/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/bmp/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/bmp/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/generic/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/generic/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/gif/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/gif/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/ico/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/ico/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/pmaps/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/pmaps/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/psd/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/psd/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/tga/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/tga/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/tgv/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/tgv/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/tiff/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/tiff/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/wbmp/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/wbmp/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/webp/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/webp/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/xpm/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/xpm/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_savers/tgv/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_savers/tgv/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_savers/tiff/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_savers/tiff/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_savers/webp/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_savers/webp/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/ecore/system/systemd/v-1.28/module.so : lib/aarch64-linux-gnu/ecore/system/systemd/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/ecore/system/upower/v-1.28/module.so : lib/aarch64-linux-gnu/ecore/system/upower/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/ecore_evas/engines/extn/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_evas/engines/extn/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/ecore_evas/engines/x/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_evas/engines/x/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/ecore_imf/modules/scim/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_imf/modules/scim/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/ecore_imf/modules/xim/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_imf/modules/xim/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/efreet/v-1.28/efreet_desktop_cache_create : lib/aarch64-linux-gnu/efreet/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/efreet/v-1.28/efreet_icon_cache_create : lib/aarch64-linux-gnu/efreet/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/efreet/v-1.28/efreet_mime_cache_create : lib/aarch64-linux-gnu/efreet/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/edje/modules/emotion/v-1.28/module.so : lib/aarch64-linux-gnu/edje/modules/emotion/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/emotion/modules/gstreamer1/v-1.28/module.so : lib/aarch64-linux-gnu/emotion/modules/gstreamer1/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/ethumb/modules/emotion/v-1.28/module.so : lib/aarch64-linux-gnu/ethumb/modules/emotion/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/eeze/modules/sensor/fake/v-1.28/module.so : lib/aarch64-linux-gnu/eeze/modules/sensor/fake/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/eeze/modules/sensor/udev/v-1.28/module.so : lib/aarch64-linux-gnu/eeze/modules/sensor/udev/v-1.28
+        $EFL_LIB_INSTALL_DIR/bin/efreetd : bin
+        $EFL_LIB_INSTALL_DIR/bin/diffeet : bin
+        $EFL_LIB_INSTALL_DIR/bin/ecore_evas_convert : bin
+        $EFL_LIB_INSTALL_DIR/bin/edje_cc : bin
+        $EFL_LIB_INSTALL_DIR/bin/edje_codegen : bin
+        $EFL_LIB_INSTALL_DIR/bin/edje_decc : bin
+        $EFL_LIB_INSTALL_DIR/bin/edje_external_inspector : bin
+        $EFL_LIB_INSTALL_DIR/bin/edje_inspector : bin
+        $EFL_LIB_INSTALL_DIR/bin/edje_pick : bin
+        $EFL_LIB_INSTALL_DIR/bin/edje_player : bin
+        $EFL_LIB_INSTALL_DIR/bin/edje_recc : bin
+        $EFL_LIB_INSTALL_DIR/bin/edje_watch : bin
+        $EFL_LIB_INSTALL_DIR/bin/eet : bin
+        $EFL_LIB_INSTALL_DIR/bin/eetpack : bin
+        $EFL_LIB_INSTALL_DIR/bin/eeze_disk_ls : bin
+        $EFL_LIB_INSTALL_DIR/bin/eeze_mount : bin
+        $EFL_LIB_INSTALL_DIR/bin/eeze_scanner : bin
+        $EFL_LIB_INSTALL_DIR/bin/eeze_scanner_monitor : bin
+        $EFL_LIB_INSTALL_DIR/bin/eeze_umount : bin
+        $EFL_LIB_INSTALL_DIR/bin/efl_debug : bin
+        $EFL_LIB_INSTALL_DIR/bin/efl_debugd : bin
+        $EFL_LIB_INSTALL_DIR/bin/eina_btlog : bin
+        $EFL_LIB_INSTALL_DIR/bin/eina_modinfo : bin
+        $EFL_LIB_INSTALL_DIR/bin/eldbus-codegen : bin
+        $EFL_LIB_INSTALL_DIR/bin/elementary_codegen : bin
+        $EFL_LIB_INSTALL_DIR/bin/elementary_perf : bin
+        $EFL_LIB_INSTALL_DIR/bin/elementary_quicklaunch : bin
+        $EFL_LIB_INSTALL_DIR/bin/elementary_run : bin
+        $EFL_LIB_INSTALL_DIR/bin/elementary_test : bin
+        $EFL_LIB_INSTALL_DIR/bin/elm_prefs_cc : bin
+        $EFL_LIB_INSTALL_DIR/bin/embryo_cc : bin
+        $EFL_LIB_INSTALL_DIR/bin/eo_debug : bin
+        $EFL_LIB_INSTALL_DIR/bin/eolian_gen : bin
+        $EFL_LIB_INSTALL_DIR/bin/ethumb : bin
+        $EFL_LIB_INSTALL_DIR/bin/ethumbd : bin
+        $EFL_LIB_INSTALL_DIR/bin/ethumbd_client: bin
+        $EFL_LIB_INSTALL_DIR/bin/exactness : bin
+        $EFL_LIB_INSTALL_DIR/bin/exactness_inject : bin
+        $EFL_LIB_INSTALL_DIR/bin/exactness_play : bin
+        $EFL_LIB_INSTALL_DIR/bin/exactness_record : bin
+        $EFL_LIB_INSTALL_DIR/bin/vieet : bin
 install_lib:
     - /usr/lib/aarch64-linux-gnu/liblua5.1.so.0
     - /usr/lib/aarch64-linux-gnu/liblua5.1.so.0.0.0
     - /usr/lib/aarch64-linux-gnu/liblua5.1.so.0
     - /usr/lib/aarch64-linux-gnu/liblua5.1.so.0.0.0
-    - lib/aarch64-linux-gnu/libefl.so.1
-    - lib/aarch64-linux-gnu/libefl.so.1.28.1
-    - lib/aarch64-linux-gnu/libeina.so.1
-    - lib/aarch64-linux-gnu/libeina.so.1.28.1
-    - lib/aarch64-linux-gnu/libeo.so.1
-    - lib/aarch64-linux-gnu/libeo.so.1.28.1
-    - lib/aarch64-linux-gnu/libelementary.so.1
-    - lib/aarch64-linux-gnu/libelementary.so.1.28.1
-    - lib/aarch64-linux-gnu/libevas.so.1
-    - lib/aarch64-linux-gnu/libevas.so.1.28.1
-    - lib/aarch64-linux-gnu/libecore.so.1
-    - lib/aarch64-linux-gnu/libecore.so.1.28.1
-    - lib/aarch64-linux-gnu/libeldbus.so.1
-    - lib/aarch64-linux-gnu/libeldbus.so.1.28.1
-    - lib/aarch64-linux-gnu/libecore_x.so.1
-    - lib/aarch64-linux-gnu/libecore_x.so.1.28.1
-    - lib/aarch64-linux-gnu/libeet.so.1
-    - lib/aarch64-linux-gnu/libeet.so.1.28.1
-    - lib/aarch64-linux-gnu/libecore_input.so.1
-    - lib/aarch64-linux-gnu/libecore_input.so.1.28.1
-    - lib/aarch64-linux-gnu/libecore_input_evas.so.1
-    - lib/aarch64-linux-gnu/libecore_input_evas.so.1.28.1
-    - lib/aarch64-linux-gnu/libecore_evas.so.1
-    - lib/aarch64-linux-gnu/libecore_evas.so.1.28.1
-    - lib/aarch64-linux-gnu/libemile.so.1
-    - lib/aarch64-linux-gnu/libemile.so.1.28.1
-    - lib/aarch64-linux-gnu/libelput.so.1
-    - lib/aarch64-linux-gnu/libelput.so.1.28.1
-    - lib/aarch64-linux-gnu/libector.so.1
-    - lib/aarch64-linux-gnu/libector.so.1.28.1
-    - lib/aarch64-linux-gnu/libecore_file.so.1
-    - lib/aarch64-linux-gnu/libecore_file.so.1.28.1
-    - lib/aarch64-linux-gnu/libecore_audio.so.1
-    - lib/aarch64-linux-gnu/libecore_audio.so.1.28.1
-    - lib/aarch64-linux-gnu/libecore_con.so.1
-    - lib/aarch64-linux-gnu/libecore_con.so.1.28.1
-    - lib/aarch64-linux-gnu/libecore_imf.so.1
-    - lib/aarch64-linux-gnu/libecore_imf.so.1.28.1
-    - lib/aarch64-linux-gnu/libecore_imf_evas.so.1
-    - lib/aarch64-linux-gnu/libecore_imf_evas.so.1.28.1
-    - lib/aarch64-linux-gnu/libecore_ipc.so.1
-    - lib/aarch64-linux-gnu/libecore_ipc.so.1.28.1
-    - lib/aarch64-linux-gnu/libedje.so.1
-    - lib/aarch64-linux-gnu/libedje.so.1.28.1
-    - lib/aarch64-linux-gnu/libefreet.so.1
-    - lib/aarch64-linux-gnu/libefreet.so.1.28.1
-    - lib/aarch64-linux-gnu/libefreet_mime.so.1
-    - lib/aarch64-linux-gnu/libefreet_mime.so.1.28.1
-    - lib/aarch64-linux-gnu/libefreet_trash.so.1
-    - lib/aarch64-linux-gnu/libefreet_trash.so.1.28.1
-    - lib/aarch64-linux-gnu/libethumb_client.so.1
-    - lib/aarch64-linux-gnu/libethumb_client.so.1
-    - lib/aarch64-linux-gnu/libethumb_client.so.1.28.1
-    - lib/aarch64-linux-gnu/libemotion.so.1
-    - lib/aarch64-linux-gnu/libemotion.so.1.28.1
-    - lib/aarch64-linux-gnu/libeio.so.1
-    - lib/aarch64-linux-gnu/libeio.so.1.28.1
-    - lib/aarch64-linux-gnu/libeeze.so.1
-    - lib/aarch64-linux-gnu/libeeze.so.1.28.1
-    - lib/aarch64-linux-gnu/libembryo.so.1
-    - lib/aarch64-linux-gnu/libembryo.so.1.28.1
-    - lib/aarch64-linux-gnu/libethumb.so.1
-    - lib/aarch64-linux-gnu/libethumb.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libefl.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libefl.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libefl.so
+    - $EFL_LIB_INSTALL_DIR/lib/libeina.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libeina.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libeina.so
+    - $EFL_LIB_INSTALL_DIR/lib/libeo.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libeo.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libeo.so
+    - $EFL_LIB_INSTALL_DIR/lib/libelementary.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libelementary.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libelementary.so
+    - $EFL_LIB_INSTALL_DIR/lib/libevas.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libevas.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libevas.so
+    - $EFL_LIB_INSTALL_DIR/lib/libecore.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libecore.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libecore.so
+    - $EFL_LIB_INSTALL_DIR/lib/libeldbus.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libeldbus.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libeldbus.so
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_x.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_x.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_x.so
+    - $EFL_LIB_INSTALL_DIR/lib/libeet.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libeet.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libeet.so
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_input.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_input.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_input.so
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_input_evas.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_input_evas.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_input_evas.so
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_evas.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_evas.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_evas.so
+    - $EFL_LIB_INSTALL_DIR/lib/libemile.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libemile.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libemile.so
+    - $EFL_LIB_INSTALL_DIR/lib/libelput.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libelput.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libelput.so
+    - $EFL_LIB_INSTALL_DIR/lib/libector.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libector.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libector.so
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_file.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_file.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_file.so
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_audio.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_audio.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_audio.so
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_con.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_con.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_con.so
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_imf.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_imf.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_imf.so
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_imf_evas.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_imf_evas.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_imf_evas.so
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_ipc.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_ipc.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libecore_ipc.so
+    - $EFL_LIB_INSTALL_DIR/lib/libedje.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libedje.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libedje.so
+    - $EFL_LIB_INSTALL_DIR/lib/libefreet.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libefreet.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libefreet.so
+    - $EFL_LIB_INSTALL_DIR/lib/libefreet_mime.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libefreet_mime.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libefreet_mime.so
+    - $EFL_LIB_INSTALL_DIR/lib/libefreet_trash.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libefreet_trash.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libefreet_trash.so
+    - $EFL_LIB_INSTALL_DIR/lib/libethumb_client.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libethumb_client.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libethumb_client.so
+    - $EFL_LIB_INSTALL_DIR/lib/libemotion.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libemotion.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libemotion.so
+    - $EFL_LIB_INSTALL_DIR/lib/libeio.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libeio.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libeio.so
+    - $EFL_LIB_INSTALL_DIR/lib/libeeze.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libeeze.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libeeze.so
+    - $EFL_LIB_INSTALL_DIR/lib/libembryo.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libembryo.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libembryo.so
+    - $EFL_LIB_INSTALL_DIR/lib/libethumb.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libethumb.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libethumb.so

@@ -28,7 +28,6 @@ export ELM_DATA_DIR="$APP_DIR/share/elementary"
 export E_DATA_DIR="$APP_DIR/share/elementary"
 export ELM_LOCALE_DIR="$APP_DIR/share/locale"
 export E_LOCALE_DIR="$APP_DIR/share/locale"
-export ELM_DISPLAY="x11"
 
 export LD_LIBRARY_PATH="$APP_DIR/lib/aarch64-linux-gnu:${LD_LIBRARY_PATH:-}"
 

@@ -94,20 +94,25 @@ install_data:
         $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/generic/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/generic/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/gif/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/gif/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/ico/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/ico/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/jp2k/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/jp2k/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/pmaps/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/pmaps/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/psd/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/psd/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/qoi/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/qoi/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/tga/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/tga/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/tgv/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/tgv/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/tiff/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/tiff/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/wbmp/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/wbmp/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/webp/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/webp/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/xpm/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/xpm/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_savers/qoi/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_savers/qoi/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_savers/tgv/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_savers/tgv/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_savers/tiff/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_savers/tiff/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_savers/webp/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_savers/webp/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/evas/utils : lib/aarch64-linux-gnu/evas
         $EFL_LIB_INSTALL_DIR/lib/ecore/system/systemd/v-1.28/module.so : lib/aarch64-linux-gnu/ecore/system/systemd/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/ecore/system/upower/v-1.28/module.so : lib/aarch64-linux-gnu/ecore/system/upower/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/ecore_evas/engines/drm/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_evas/engines/extn/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/ecore_con/utils/v-1.28/efl_net_proxy_helper : lib/aarch64-linux-gnu/ecore_con/utils/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/ecore_evas/engines/drm/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_evas/engines/drm/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/ecore_evas/engines/extn/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_evas/engines/drm/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/ecore_evas/engines/wayland/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_evas/engines/wayland/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/ecore_evas/engines/x/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_evas/engines/x/v-1.28
@@ -119,8 +124,10 @@ install_data:
         $EFL_LIB_INSTALL_DIR/lib/efreet/v-1.28/efreet_icon_cache_create : lib/aarch64-linux-gnu/efreet/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/efreet/v-1.28/efreet_mime_cache_create : lib/aarch64-linux-gnu/efreet/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/edje/modules/emotion/v-1.28/module.so : lib/aarch64-linux-gnu/edje/modules/emotion/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/edje/utils/v-1.28/epp : lib/aarch64-linux-gnu/edje/utils/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/emotion/modules/gstreamer1/v-1.28/module.so : lib/aarch64-linux-gnu/emotion/modules/gstreamer1/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/ethumb/modules/emotion/v-1.28/module.so : lib/aarch64-linux-gnu/ethumb/modules/emotion/v-1.28
+        $EFL_LIB_INSTALL_DIR/lib/ethumb_client/utils/v-1.28/ethumbd_slave : lib/aarch64-linux-gnu/ethumb_client/utils/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/eeze/modules/sensor/fake/v-1.28/module.so : lib/aarch64-linux-gnu/eeze/modules/sensor/fake/v-1.28
         $EFL_LIB_INSTALL_DIR/lib/eeze/modules/sensor/udev/v-1.28/module.so : lib/aarch64-linux-gnu/eeze/modules/sensor/udev/v-1.28
         $EFL_LIB_INSTALL_DIR/bin/efreetd : bin
@@ -181,6 +188,12 @@ install_lib:
     - $EFL_LIB_INSTALL_DIR/lib/libeo.so.1.28.1
     - $EFL_LIB_INSTALL_DIR/lib/libeo.so.1
     - $EFL_LIB_INSTALL_DIR/lib/libeo.so
+    - $EFL_LIB_INSTALL_DIR/lib/libeo_dbg.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libeo_dbg.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libeo_dbg.so
+    - $EFL_LIB_INSTALL_DIR/lib/libeolian.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libeolian.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libeolian.so
     - $EFL_LIB_INSTALL_DIR/lib/libelementary.so.1.28.1
     - $EFL_LIB_INSTALL_DIR/lib/libelementary.so.1
     - $EFL_LIB_INSTALL_DIR/lib/libelementary.so
@@ -271,3 +284,9 @@ install_lib:
     - $EFL_LIB_INSTALL_DIR/lib/libethumb.so.1.28.1
     - $EFL_LIB_INSTALL_DIR/lib/libethumb.so.1
     - $EFL_LIB_INSTALL_DIR/lib/libethumb.so
+    - $EFL_LIB_INSTALL_DIR/lib/libexactness_play.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libexactness_play.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libexactness_play.so
+    - $EFL_LIB_INSTALL_DIR/lib/libexactness_record.so.1.28.1
+    - $EFL_LIB_INSTALL_DIR/lib/libexactness_record.so.1
+    - $EFL_LIB_INSTALL_DIR/lib/libexactness_record.so

@@ -1,13 +1,16 @@
 {
-    "policy_groups": [],
+    "policy_groups": [
+        "audio",
+        "video",
+        "content_exchange"
+    ],
     "policy_version": "$ENV{APPARMOR_POLICY}",
     "read_path": [
-        "/opt/click.ubuntu.com/pefl.maxperl",
-        "/home/phablet"
+        "/home/phablet",
+        "/home/phablet/",
+        "/home/phablet/**"
     ],
     "write_path": [
-        "/opt/click.ubuntu.com/pefl.maxperl",
-        "/home/phablet"
-    ],
-    "template": "unconfined"
+        "/run/user/32011/"
+    ]
 }

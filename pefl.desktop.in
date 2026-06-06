@@ -1,6 +1,6 @@
 [Desktop Entry]
 _Name=pefl
-Exec="run_config.sh"
+Exec="run_app.sh"
 Icon=assets/logo.svg
 Terminal=false
 Type=Application

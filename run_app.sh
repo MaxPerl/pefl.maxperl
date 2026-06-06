@@ -8,18 +8,15 @@ APP_HOME="/home/phablet/.local/share/${APP_ID}"
 APP_CACHE="/home/phablet/.cache/${APP_ID}"
 APP_CONFIG="/home/phablet/.config/${APP_ID}"
 
-mkdir -p "$APP_HOME" "$APP_CACHE" "$APP_CONFIG"
-mkdir -p "$APP_HOME/.cache/efreet"
-mkdir -p "$APP_HOME/.elementary/config"
-
-export HOME="$APP_HOME"
 export XDG_DATA_HOME="$APP_HOME/.local/share"
 export XDG_CACHE_HOME="$APP_CACHE"
 export XDG_CONFIG_HOME="$APP_CONFIG"
 export XDG_DATA_DIRS="$APP_DIR/share:/usr/local/share:/usr/share"
+export ELM_CONFIG_DIR_XDG="/opt/click.ubuntu.com/pefl.maxperl/current/share/elementary/config"
+export XDG_CONFIG_DIRS="$APP_CONFIG:/opt/click.ubuntu.com/pefl.maxperl/current/share/elementary/config:{XDG_CONFIG_DIRS:-}"
 
 export ELM_PREFIX="$APP_DIR"
-export EPREFIX="$APP_DIR"
+export E_PREFIX="$APP_DIR"
 export ELM_BIN_DIR="$APP_DIR/bin"
 export E_BIN_DIR="$APP_DIR/bin"
 export ELM_LIB_DIR="$APP_DIR/lib/aarch64-linux-gnu"
@@ -30,5 +27,13 @@ export ELM_LOCALE_DIR="$APP_DIR/share/locale"
 export E_LOCALE_DIR="$APP_DIR/share/locale"
 
 export LD_LIBRARY_PATH="$APP_DIR/lib/aarch64-linux-gnu:${LD_LIBRARY_PATH:-}"
+export PERL5LIB="$APP_DIR/perl5:$APP_DIR/perl5/lib/perl5:${PERL5LIB:-}"
 
-exec "$APP_DIR/elementary_config" "$@" 
+export EINA_LOG_BACKTRACE=0
+#export GST_DEBUG="*:3"
+export GST_PLUGIN_PATH="$APP_DIR/lib/gstreamer-1.0"
+
+#export WAYLAND_DEBUG=client
+#export ELM_DISPLAY=wl
+
+exec "bin/perl" "$APP_DIR/UbuntuApp.pl" "$@" 

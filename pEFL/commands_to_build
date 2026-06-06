@@ -1,0 +1,51 @@
+1. Start Libertine Container
+
+libertine-launch -i pefl /bin/bash
+
+2. Compile efl (see clickable.yaml)
+
+ meson --prefix=/opt/click.ubuntu.com/pefl.maxperl/current -Dbuild-tests=false build
+
+ ninja -C build
+
+fakeroot ninja -C build install
+
+3. Compile perl (see clickable.yaml)
+
+(I think we copied it from clickable??)
+
+
+4. Compile ExtUtils::PkgConfig
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/click.ubuntu.com/pefl.maxperl/current/lib/aarch64-linux-gnu/pkgconfig
+
+Vorarbeiten für pEFL oder ExtUtils (wohl eher!!!), die ich nicht mehr verstehe:
+
+fakeroot mkdir /opt/click.ubuntu.com/pefl.maxperl/current/lib/perl5/site_perl/5.38.2/ExtUtils
+
+ cd /opt/click.ubuntu.com/pefl.maxperl/current/lib/perl5/site_perl/
+(fakeroot chmod g+w ./5.38.2)
+ fakeroot chmod +w ./5.38.2
+
+ cd /opt/click.ubuntu.com/pefl.maxperl/current/lib/
+ fakeroot chmod -R +w ./perl5
+ fakeroot chmod -R o+w ./perl5
+fakeroot chmod -R +w ./perl5
+fakeroot chown -R 32011:32011 perl5
+fakeroot chmod -R +w ./perl5
+
+ /opt/click.ubuntu.com/pefl.maxperl/current/bin/perl ./Makefile.PL
+ /opt/click.ubuntu.com/pefl.maxperl/current/bin/perl ./Makefile.PL
+make
+fakeroot make install
+
+
+4. Compile pEFL
+
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/click.ubuntu.com/pefl.maxperl/current/lib/aarch64-linux-gnu/pkgconfig
+
+
+/opt/click.ubuntu.com/pefl.maxperl/current/bin/perl ./Makefile.PL INSTALL_BASE=/opt/click.ubuntu.com/pefl.maxperl/current/pEFL
+
+make
+
+fakeroot make install

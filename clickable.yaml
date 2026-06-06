@@ -4,6 +4,50 @@ builder: cmake
 kill: pefl
 skip_review: true
 libraries:
+    gstlibav:
+        dependencies_host:
+            - build-essential
+            - ninja-build
+            - meson
+            - flex
+            - bison
+        dependencies_target:
+            - libnice-dev 
+            - nasm 
+            - libsrtp2-dev 
+            - gsoap 
+            - libgsoap-dev 
+            - libmicrohttpd-dev 
+            - libconfig-dev 
+            - libspdlog-dev 
+            - libusrsctp-dev 
+            - protobuf-compiler 
+            - libprotobuf-dev 
+            - libpciaccess-dev  
+            #- libboost-all-dev 
+            - rapidjson-dev  
+            - librabbitmq-dev
+            - libavcodec-dev 
+            - libavformat-dev 
+            - libavutil-dev 
+            - libavfilter-dev 
+            - ffmpeg
+        builder: custom
+        build:
+            - wget https://gitlab.com/gstreamer/gstreamer/-/archive/1.24/gstreamer-1.24.tar.gz
+            - tar xvf gstreamer-1.24.tar.gz
+            #- mv gstreamer-1.24-6aa055e9606104be1f095896d0b292b06dfb8dd9 gstreamer-1.24
+            - "perl ${ROOT}/patch-gstreamer.pl ${ROOT} ${BUILD_DIR}"
+            - meson --cross-file "${SRC_DIR}/dist/lomiri-${ARCH_TRIPLET}.ini" --prefix=/opt/click.ubuntu.com/pefl.maxperl/current -Dauto_features=disabled -Dpython=disabled -Dlibav=enabled -Dlibnice=enabled -Dbase=enabled -Dgood=enabled -Dugly=disabled -Dbad=enabled -Ddevtools=disabled -Drtsp_server=disabled -Dgst-examples=disabled -Dqt5=disabled -Dtools=enabled -Dtests=disabled -Dexamples=disabled -Dintrospection=disabled -Dnls=disabled -Ddoc=disabled -Dgstreamer:ptp-helper-permissions=none -Dlibnice:gupnp=auto -Dlibnice:gstreamer=enabled -Dlibnice:crypto-library=auto -Dgst-plugins-base:playback=enabled -Dgst-plugins-base:typefind=enabled -Dgst-plugins-base:app=enabled -Dgst-plugins-base:videoconvertscale=enabled -Dgst-plugins-good:rtsp=enabled -Dgst-plugins-good:rtpmanager=enabled -Dgst-plugins-good:autodetect=enabled -Dgst-plugins-good:udp=enabled -Dgst-plugins-good:rtp=enabled -Dgst-plugins-good:debugutils=enabled -Dgst-plugins-good:multifile=enabled -Dgst-plugins-good:isomp4=enabled -Dgst-plugins-bad:webrtc=enabled -Dgst-plugins-bad:codectimestamper=enabled -Dgst-plugins-bad:videoparsers=enabled -Dgst-plugins-bad:dtls=enabled -Dgst-plugins-bad:srtp=enabled -Dgst-plugins-bad:sctp=enabled -Dgst-plugins-bad:debugutils=enabled build "${BUILD_DIR}/gstreamer-1.24"
+            #- python3 "$ROOT/meson/meson.py" --cross-file "${SRC_DIR}/dist/lomiri-${ARCH_TRIPLET}.ini" --prefix=/opt/click.ubuntu.com/pefl.maxperl/current -Dauto_features=enabled -Dbase=enabled -Dgood=enabled -Dbad=disabled -Dugly=disabled -Dlibav=enabled -Dtools=enabled -Dgstreamer:dbghelp=disabled -Dpython=disabled -Ddevtools=disabled -Drtsp_server=disabled -Dgst-examples=disabled -Dqt5=disabled -Dtests=disabled -Dexamples=disabled -Dintrospection=disabled -Dnls=disabled -Ddoc=disabled -Drs=disabled build "${BUILD_DIR}/gstreamer-1.26"
+            - ninja -C build
+            - env DESTDIR="${INSTALL_DIR}" ninja -C build install
+    perl:
+        dependencies_host:
+            - build-essential
+        builder: custom
+        build:
+            - "perl ${ROOT}/install-perl.pl ${BUILD_DIR}, ${INSTALL_DIR}"
     efl:
         dependencies_host:
             - ninja-build
@@ -52,7 +96,8 @@ libraries:
             - libxrandr-dev 
             - libxtst-dev 
             - libxss-dev 
-            - libgstreamer-plugins-base1.0-dev  
+            - libgstreamer-plugins-base1.0-dev
+            - libgstreamer-plugins-good1.0-dev
             - libscim-dev 
             - libxdamage-dev
             - libwebp-dev 
@@ -61,232 +106,139 @@ libraries:
             - liblua5.1.0-dev
             - liblua5.1.0
             - libxkbcommon-x11-dev
+            #- libextutils-pkgconfig-perl
+            - libavif-dev
+            - libyuv-dev
         builder: custom
         build:
+            - wget https://download.enlightenment.org/rel/libs/efl/efl-1.28.1.tar.xz
             - tar xvf efl-1.28.1.tar.xz
-            - meson --cross-file "${SRC_DIR}/dist/lomiri-${ARCH_TRIPLET}.ini" --prefix=/ -Dbuild-tests=false -Dbindings="" -Dwl=true -Ddrm=true build "${BUILD_DIR}/efl-1.28.1"
+            - "perl ${ROOT}/patch-emotion.pl ${ROOT} ${BUILD_DIR}"
+            - meson --cross-file "${SRC_DIR}/dist/lomiri-${ARCH_TRIPLET}.ini" --prefix=/opt/click.ubuntu.com/pefl.maxperl/current -Dbuild-tests=false -Dbindings="" -Dwl=true -Dopengl=full -Deeze=false -Dinput=false -Deina-magic-debug=false -Dbuild-tests=false build "${BUILD_DIR}/efl-1.28.1"
             - ninja -C build
             - env DESTDIR="${INSTALL_DIR}" ninja -C build install
-            #- wget https://download.enlightenment.org/rel/libs/efl/efl-1.28.1.tar.xz
 dependencies_target:
     - liblua5.1.0-dev
-    - liblua5.1.0    
+    - liblua5.1.0
+    # The following libs are for support of av264_dec in gstreamer
+    - libavformat60
+    - libavcodec60 
+    - libavutil58
+    - libavfilter9
+    - libswscale7
+    - libpostproc57
+    - libpocketsphinx3 
+    - libsphinxbase3t64
+    - libswresample4
+    - librubberband2
+    - libmysofa1
+    - libplacebo338
+    - libvidstab1.1
+    - libzmq5
+    - libzimg2
+    - libbluray2
+    - librabbitmq4
+    - librist4
+    - libssh-gcrypt-4
+    - libblas3
+    - liblapack3
+    - libfftw3-double3
+    - libsodium23
+    - libpgm-5.3-0t64
+    - libnorm1t64
+    - libudfread0
+    - libmbedcrypto7t64
+    - libcjson1
+    - libgfortran5
 install_root_data:
-    - "run_config.sh"
-    - "$EFL_LIB_INSTALL_DIR/bin/elementary_config"
+    - "run_app.sh"
+    - "UbuntuApp.pl"
+    - "default.edj"
+    - "perl5"
 install_data:
-        $EFL_LIB_INSTALL_DIR/share : ""
-        $EFL_LIB_INSTALL_DIR/lib/edje/modules/elm/v-1.28/module.so : lib/aarch64-linux-gnu/edje/modules/elm/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/elementary/modules/prefs/v-1.28/module.so : lib/aarch64-linux-gnu/elementary/modules/prefs/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/elementary/modules/access_output/v-1.28/module.so : lib/aarch64-linux-gnu/elementary/modules/access_output/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/elementary/modules/test_entry/v-1.28/module.so : lib/aarch64-linux-gnu/elementary/modules/test_entry/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/elementary/modules/test_map/v-1.28/module.so : lib/aarch64-linux-gnu/elementary/modules/test_map/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/elementary/modules/web/none/v-1.28/module.so : lib/aarch64-linux-gnu/elementary/modules/web/none/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/evas/modules/engines/buffer/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/engines/buffer/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/evas/modules/engines/drm/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/engines/drm/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/evas/modules/engines/gl_drm/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/engines/gl_drm/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/evas/modules/engines/gl_generic/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/engines/gl_generic/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/evas/modules/engines/gl_x11/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/engines/gl_x11/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/evas/modules/engines/software_x11/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/engines/software_x11/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/evas/modules/engines/wayland_egl/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/engines/wayland_egl/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/evas/modules/engines/wayland_shm/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/engines/wayland_shm/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/bmp/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/bmp/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/generic/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/generic/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/gif/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/gif/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/ico/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/ico/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/jp2k/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/jp2k/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/pmaps/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/pmaps/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/psd/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/psd/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/qoi/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/qoi/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/tga/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/tga/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/tgv/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/tgv/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/tiff/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/tiff/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/wbmp/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/wbmp/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/webp/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/webp/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_loaders/xpm/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_loaders/xpm/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_savers/qoi/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_savers/qoi/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_savers/tgv/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_savers/tgv/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_savers/tiff/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_savers/tiff/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/evas/modules/image_savers/webp/v-1.28/module.so : lib/aarch64-linux-gnu/evas/modules/image_savers/webp/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/evas/utils : lib/aarch64-linux-gnu/evas
-        $EFL_LIB_INSTALL_DIR/lib/ecore/system/systemd/v-1.28/module.so : lib/aarch64-linux-gnu/ecore/system/systemd/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/ecore/system/upower/v-1.28/module.so : lib/aarch64-linux-gnu/ecore/system/upower/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/ecore_con/utils/v-1.28/efl_net_proxy_helper : lib/aarch64-linux-gnu/ecore_con/utils/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/ecore_evas/engines/drm/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_evas/engines/drm/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/ecore_evas/engines/extn/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_evas/engines/drm/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/ecore_evas/engines/wayland/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_evas/engines/wayland/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/ecore_evas/engines/x/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_evas/engines/x/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/ecore_imf/modules/scim/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_imf/modules/scim/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/ecore_imf/modules/wayland/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_imf/modules/wayland/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/ecore_imf/modules/xim/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_imf/modules/xim/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/ecore_wl2/engines/dmabuf/v-1.28/module.so : lib/aarch64-linux-gnu/ecore_wl2/engines/dmabuf/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/efreet/v-1.28/efreet_desktop_cache_create : lib/aarch64-linux-gnu/efreet/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/efreet/v-1.28/efreet_icon_cache_create : lib/aarch64-linux-gnu/efreet/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/efreet/v-1.28/efreet_mime_cache_create : lib/aarch64-linux-gnu/efreet/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/edje/modules/emotion/v-1.28/module.so : lib/aarch64-linux-gnu/edje/modules/emotion/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/edje/utils/v-1.28/epp : lib/aarch64-linux-gnu/edje/utils/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/emotion/modules/gstreamer1/v-1.28/module.so : lib/aarch64-linux-gnu/emotion/modules/gstreamer1/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/ethumb/modules/emotion/v-1.28/module.so : lib/aarch64-linux-gnu/ethumb/modules/emotion/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/ethumb_client/utils/v-1.28/ethumbd_slave : lib/aarch64-linux-gnu/ethumb_client/utils/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/eeze/modules/sensor/fake/v-1.28/module.so : lib/aarch64-linux-gnu/eeze/modules/sensor/fake/v-1.28
-        $EFL_LIB_INSTALL_DIR/lib/eeze/modules/sensor/udev/v-1.28/module.so : lib/aarch64-linux-gnu/eeze/modules/sensor/udev/v-1.28
-        $EFL_LIB_INSTALL_DIR/bin/efreetd : bin
-        $EFL_LIB_INSTALL_DIR/bin/diffeet : bin
-        $EFL_LIB_INSTALL_DIR/bin/ecore_evas_convert : bin
-        $EFL_LIB_INSTALL_DIR/bin/edje_cc : bin
-        $EFL_LIB_INSTALL_DIR/bin/edje_codegen : bin
-        $EFL_LIB_INSTALL_DIR/bin/edje_decc : bin
-        $EFL_LIB_INSTALL_DIR/bin/edje_external_inspector : bin
-        $EFL_LIB_INSTALL_DIR/bin/edje_inspector : bin
-        $EFL_LIB_INSTALL_DIR/bin/edje_pick : bin
-        $EFL_LIB_INSTALL_DIR/bin/edje_player : bin
-        $EFL_LIB_INSTALL_DIR/bin/edje_recc : bin
-        $EFL_LIB_INSTALL_DIR/bin/edje_watch : bin
-        $EFL_LIB_INSTALL_DIR/bin/eet : bin
-        $EFL_LIB_INSTALL_DIR/bin/eetpack : bin
-        $EFL_LIB_INSTALL_DIR/bin/eeze_disk_ls : bin
-        $EFL_LIB_INSTALL_DIR/bin/eeze_mount : bin
-        $EFL_LIB_INSTALL_DIR/bin/eeze_scanner : bin
-        $EFL_LIB_INSTALL_DIR/bin/eeze_scanner_monitor : bin
-        $EFL_LIB_INSTALL_DIR/bin/eeze_umount : bin
-        $EFL_LIB_INSTALL_DIR/bin/efl_debug : bin
-        $EFL_LIB_INSTALL_DIR/bin/efl_debugd : bin
-        $EFL_LIB_INSTALL_DIR/bin/eina_btlog : bin
-        $EFL_LIB_INSTALL_DIR/bin/eina_modinfo : bin
-        $EFL_LIB_INSTALL_DIR/bin/eldbus-codegen : bin
-        $EFL_LIB_INSTALL_DIR/bin/elementary_codegen : bin
-        $EFL_LIB_INSTALL_DIR/bin/elementary_perf : bin
-        $EFL_LIB_INSTALL_DIR/bin/elementary_quicklaunch : bin
-        $EFL_LIB_INSTALL_DIR/bin/elementary_run : bin
-        $EFL_LIB_INSTALL_DIR/bin/elementary_test : bin
-        $EFL_LIB_INSTALL_DIR/bin/elm_prefs_cc : bin
-        $EFL_LIB_INSTALL_DIR/bin/embryo_cc : bin
-        $EFL_LIB_INSTALL_DIR/bin/eo_debug : bin
-        $EFL_LIB_INSTALL_DIR/bin/eolian_gen : bin
-        $EFL_LIB_INSTALL_DIR/bin/ethumb : bin
-        $EFL_LIB_INSTALL_DIR/bin/ethumbd : bin
-        $EFL_LIB_INSTALL_DIR/bin/ethumbd_client: bin
-        $EFL_LIB_INSTALL_DIR/bin/exactness : bin
-        $EFL_LIB_INSTALL_DIR/bin/exactness_inject : bin
-        $EFL_LIB_INSTALL_DIR/bin/exactness_play : bin
-        $EFL_LIB_INSTALL_DIR/bin/exactness_record : bin
-        $EFL_LIB_INSTALL_DIR/bin/vieet : bin
+        $EFL_LIB_INSTALL_DIR/opt/click.ubuntu.com/pefl.maxperl/current/bin : ""
+        $EFL_LIB_INSTALL_DIR/opt/click.ubuntu.com/pefl.maxperl/current/lib : ""
+        $EFL_LIB_INSTALL_DIR/opt/click.ubuntu.com/pefl.maxperl/current/share : ""
+        #$GSTLIBAV_LIB_INSTALL_DIR/opt/click.ubuntu.com/pefl.maxperl/current/bin/* : "bin"
+        #$GSTLIBAV_LIB_INSTALL_DIR/opt/click.ubuntu.com/pefl.maxperl/current/libexec : ""
+        $GSTLIBAV_LIB_INSTALL_DIR/opt/click.ubuntu.com/pefl.maxperl/current/lib/gstreamer-1.0 : "lib"
+        #$GSTLIBAV_LIB_INSTALL_DIR/opt/click.ubuntu.com/pefl.maxperl/current/share/* : "share"
+        $PERL_LIB_INSTALL_DIR/opt/click.ubuntu.com/pefl.maxperl/current/bin/perl : "bin"
+        $PERL_LIB_INSTALL_DIR/opt/click.ubuntu.com/pefl.maxperl/current/lib/perl5/5.38.2 : "lib/perl5"
+        $PERL_LIB_INSTALL_DIR/opt/click.ubuntu.com/pefl.maxperl/current/lib/perl5/site_perl : "lib/perl5"
+        $ROOT/pEFL/lib/perl5/* : "perl5"
 install_lib:
-    - /usr/lib/aarch64-linux-gnu/liblua5.1.so.0
-    - /usr/lib/aarch64-linux-gnu/liblua5.1.so.0.0.0
-    - /usr/lib/aarch64-linux-gnu/liblua5.1.so.0
-    - /usr/lib/aarch64-linux-gnu/liblua5.1.so.0.0.0
-    - $EFL_LIB_INSTALL_DIR/lib/libefl.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libefl.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libefl.so
-    - $EFL_LIB_INSTALL_DIR/lib/libefl_canvas_wl.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libefl_canvas_wl.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libefl_canvas_wl.so
-    - $EFL_LIB_INSTALL_DIR/lib/libeina.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libeina.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libeina.so
-    - $EFL_LIB_INSTALL_DIR/lib/libeo.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libeo.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libeo.so
-    - $EFL_LIB_INSTALL_DIR/lib/libeo_dbg.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libeo_dbg.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libeo_dbg.so
-    - $EFL_LIB_INSTALL_DIR/lib/libeolian.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libeolian.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libeolian.so
-    - $EFL_LIB_INSTALL_DIR/lib/libelementary.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libelementary.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libelementary.so
-    - $EFL_LIB_INSTALL_DIR/lib/libevas.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libevas.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libevas.so
-    - $EFL_LIB_INSTALL_DIR/lib/libecore.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libecore.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libecore.so
-    - $EFL_LIB_INSTALL_DIR/lib/libeldbus.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libeldbus.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libeldbus.so
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_x.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_x.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_x.so
-    - $EFL_LIB_INSTALL_DIR/lib/libeet.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libeet.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libeet.so
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_input.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_input.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_input.so
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_input_evas.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_input_evas.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_input_evas.so
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_evas.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_evas.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_evas.so
-    - $EFL_LIB_INSTALL_DIR/lib/libemile.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libemile.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libemile.so
-    - $EFL_LIB_INSTALL_DIR/lib/libelput.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libelput.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libelput.so
-    - $EFL_LIB_INSTALL_DIR/lib/libector.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libector.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libector.so
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_file.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_file.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_file.so
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_audio.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_audio.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_audio.so
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_con.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_con.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_con.so
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_drm2.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_drm2.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_drm2.so
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_imf.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_imf.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_imf.so
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_imf_evas.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_imf_evas.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_imf_evas.so
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_ipc.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_ipc.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_ipc.so
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_wl2.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_wl2.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libecore_wl2.so
-    - $EFL_LIB_INSTALL_DIR/lib/libedje.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libedje.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libedje.so
-    - $EFL_LIB_INSTALL_DIR/lib/libefreet.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libefreet.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libefreet.so
-    - $EFL_LIB_INSTALL_DIR/lib/libefreet_mime.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libefreet_mime.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libefreet_mime.so
-    - $EFL_LIB_INSTALL_DIR/lib/libefreet_trash.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libefreet_trash.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libefreet_trash.so
-    - $EFL_LIB_INSTALL_DIR/lib/libethumb_client.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libethumb_client.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libethumb_client.so
-    - $EFL_LIB_INSTALL_DIR/lib/libemotion.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libemotion.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libemotion.so
-    - $EFL_LIB_INSTALL_DIR/lib/libeio.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libeio.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libeio.so
-    - $EFL_LIB_INSTALL_DIR/lib/libeeze.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libeeze.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libeeze.so
-    - $EFL_LIB_INSTALL_DIR/lib/libembryo.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libembryo.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libembryo.so
-    - $EFL_LIB_INSTALL_DIR/lib/libethumb.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libethumb.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libethumb.so
-    - $EFL_LIB_INSTALL_DIR/lib/libexactness_play.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libexactness_play.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libexactness_play.so
-    - $EFL_LIB_INSTALL_DIR/lib/libexactness_record.so.1.28.1
-    - $EFL_LIB_INSTALL_DIR/lib/libexactness_record.so.1
-    - $EFL_LIB_INSTALL_DIR/lib/libexactness_record.so
+    - /usr/lib/${ARCH_TRIPLET}/liblua5.1.so.0
+    - /usr/lib/${ARCH_TRIPLET}/liblua5.1.so.0.0.0
+    - /usr/lib/${ARCH_TRIPLET}/liblua5.1.so.0
+    - /usr/lib/${ARCH_TRIPLET}/liblua5.1.so.0.0.0
+    - /usr/lib/${ARCH_TRIPLET}/libGL.so.1
+    - /usr/lib/${ARCH_TRIPLET}/libGL.so.1.7.0
+    - /usr/lib/${ARCH_TRIPLET}/libGLdispatch.so.0
+    - /usr/lib/${ARCH_TRIPLET}/libGLdispatch.so.0.0.0
+    - /usr/lib/${ARCH_TRIPLET}/libGLX.so.0
+    - /usr/lib/${ARCH_TRIPLET}/libGLX.so.0.0.0
+    # The following libs are for support of av264_dec in gstreamer
+    - /usr/lib/${ARCH_TRIPLET}/libavformat.so.60
+    - /usr/lib/${ARCH_TRIPLET}/libavformat.so.60.16.100
+    - /usr/lib/${ARCH_TRIPLET}/libavcodec.so.60
+    - /usr/lib/${ARCH_TRIPLET}/libavcodec.so.60.31.102
+    - /usr/lib/${ARCH_TRIPLET}/libavformat.so.60
+    - /usr/lib/${ARCH_TRIPLET}/libavformat.so.60.16.100
+    - /usr/lib/${ARCH_TRIPLET}/libavutil.so.58
+    - /usr/lib/${ARCH_TRIPLET}/libavutil.so.58.29.100
+    - /usr/lib/${ARCH_TRIPLET}/libavfilter.so.9
+    - /usr/lib/${ARCH_TRIPLET}/libavfilter.so.9.12.100
+    - /usr/lib/${ARCH_TRIPLET}/libswscale.so.7
+    - /usr/lib/${ARCH_TRIPLET}/libswscale.so.7.5.100
+    - /usr/lib/${ARCH_TRIPLET}/libpostproc.so.57
+    - /usr/lib/${ARCH_TRIPLET}/libpostproc.so.57.3.100
+    - /usr/lib/${ARCH_TRIPLET}/libpocketsphinx.so.3
+    - /usr/lib/${ARCH_TRIPLET}/libpocketsphinx.so.3.0.0
+    - /usr/lib/${ARCH_TRIPLET}/libsphinxad.so.3
+    - /usr/lib/${ARCH_TRIPLET}/libsphinxad.so.3.0.0
+    - /usr/lib/${ARCH_TRIPLET}/libsphinxbase.so.3
+    - /usr/lib/${ARCH_TRIPLET}/libsphinxbase.so.3.0.0
+    - /usr/lib/${ARCH_TRIPLET}/libswresample.so.4
+    - /usr/lib/${ARCH_TRIPLET}/libswresample.so.4.12.100
+    - /usr/lib/${ARCH_TRIPLET}/librubberband.so.2
+    - /usr/lib/${ARCH_TRIPLET}/librubberband.so.2.3.0
+    - /usr/lib/${ARCH_TRIPLET}/libmysofa.so.1
+    - /usr/lib/${ARCH_TRIPLET}/libmysofa.so.1.3.2
+    - /usr/lib/${ARCH_TRIPLET}/libplacebo.so.338
+    - /usr/lib/${ARCH_TRIPLET}/libvidstab.so.1.1
+    - /usr/lib/${ARCH_TRIPLET}/libzmq.so.5
+    - /usr/lib/${ARCH_TRIPLET}/libzmq.so.5.2.5
+    - /usr/lib/${ARCH_TRIPLET}/libzimg.so.2
+    - /usr/lib/${ARCH_TRIPLET}/libzimg.so.2.0.0
+    - /usr/lib/${ARCH_TRIPLET}/libbluray.so.2
+    - /usr/lib/${ARCH_TRIPLET}/libbluray.so.2.4.3
+    - /usr/lib/${ARCH_TRIPLET}/librabbitmq.so.4
+    - /usr/lib/${ARCH_TRIPLET}/librabbitmq.so.4.5.0
+    - /usr/lib/${ARCH_TRIPLET}/librist.so.4
+    - /usr/lib/${ARCH_TRIPLET}/librist.so.4.3.1
+    - /usr/lib/${ARCH_TRIPLET}/libssh-gcrypt.so.4
+    - /usr/lib/${ARCH_TRIPLET}/libssh-gcrypt.so.4.9.6
+    - /usr/lib/${ARCH_TRIPLET}/blas/libblas.so.3
+    - /usr/lib/${ARCH_TRIPLET}/blas/libblas.so.3.12.0
+    - /usr/lib/${ARCH_TRIPLET}/lapack/liblapack.so.3
+    - /usr/lib/${ARCH_TRIPLET}/lapack/liblapack.so.3.12.0
+    - /usr/lib/${ARCH_TRIPLET}/libfftw3.so.3
+    - /usr/lib/${ARCH_TRIPLET}/libfftw3.so.3.6.10
+    - /usr/lib/${ARCH_TRIPLET}/libfftw3_omp.so.3
+    - /usr/lib/${ARCH_TRIPLET}/libfftw3_omp.so.3.6.10
+    - /usr/lib/${ARCH_TRIPLET}/libfftw3_threads.so.3
+    - /usr/lib/${ARCH_TRIPLET}/libfftw3_threads.so.3.6.10
+    - /usr/lib/${ARCH_TRIPLET}/libsodium.so.23
+    - /usr/lib/${ARCH_TRIPLET}/libsodium.so.23.3.0
+    - /usr/lib/${ARCH_TRIPLET}/libpgm-5.3.so.0
+    - /usr/lib/${ARCH_TRIPLET}/libpgm-5.3.so.0.0.128
+    - /usr/lib/${ARCH_TRIPLET}/libnorm.so.1
+    - /usr/lib/${ARCH_TRIPLET}/libudfread.so.0
+    - /usr/lib/${ARCH_TRIPLET}/libudfread.so.0.1.0
+    - /usr/lib/${ARCH_TRIPLET}/libmbedcrypto.so.2.28.8
+    - /usr/lib/${ARCH_TRIPLET}/libmbedcrypto.so.7
+    - /usr/lib/${ARCH_TRIPLET}/libcjson.so.1
+    - /usr/lib/${ARCH_TRIPLET}/libcjson.so.1.7.17
+    - /usr/lib/${ARCH_TRIPLET}/libgfortran.so.5
+    - /usr/lib/${ARCH_TRIPLET}/libgfortran.so.5.0.0

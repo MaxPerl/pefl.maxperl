@@ -70,4 +70,18 @@ MainView {
             }
         }
     }
+    
+    Connections {
+        target: ContentHub
+
+        onImportRequested: {
+            var filePath = String(transfer.items[0].url).replace('file://', '')
+            print("Should import file", filePath)
+            var fileName = filePath.split("/").pop();
+            var popup = PopupUtils.open(installQuestion, root, {fileName: fileName});
+            popup.accepted.connect(function() {
+                contentHubInstallInProgress = true;
+                PlatformIntegration.clickInstaller.installPackage(filePath)
+            })
+        }
 }

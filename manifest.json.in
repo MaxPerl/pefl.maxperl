@@ -6,7 +6,8 @@
     "hooks": {
         "pefl": {
             "apparmor": "pefl.apparmor",
-            "desktop":  "pefl.desktop"
+            "desktop":  "pefl.desktop",
+            "content-hub": "pefl-contenthub.json"
         }
     },
     "version": "1.0.0",

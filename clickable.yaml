@@ -155,6 +155,7 @@ install_root_data:
     - "UbuntuApp.pl"
     - "default.edj"
     - "perl5"
+    - "content_hub.qml"
 install_data:
         $EFL_LIB_INSTALL_DIR/opt/click.ubuntu.com/pefl.maxperl/current/bin : ""
         $EFL_LIB_INSTALL_DIR/opt/click.ubuntu.com/pefl.maxperl/current/lib : ""

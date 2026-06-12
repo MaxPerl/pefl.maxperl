@@ -33,7 +33,4 @@ export EINA_LOG_BACKTRACE=0
 #export GST_DEBUG="*:3"
 export GST_PLUGIN_PATH="$APP_DIR/lib/gstreamer-1.0"
 
-#export WAYLAND_DEBUG=client
-#export ELM_DISPLAY=wl
-
 exec "bin/perl" "$APP_DIR/UbuntuApp.pl" "$@" 

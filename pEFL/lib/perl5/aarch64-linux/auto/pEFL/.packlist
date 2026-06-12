@@ -11,6 +11,9 @@
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/auto/pEFL/Ecore/Event/SignalUser/SignalUser.so
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/auto/pEFL/Ecore/EventFilter/EventFilter.so
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/auto/pEFL/Ecore/EventHandler/EventHandler.so
+/opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/auto/pEFL/Ecore/FdHandler/FdHandler.so
+/opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/auto/pEFL/Ecore/File/File.so
+/opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/auto/pEFL/Ecore/FileMonitor/FileMonitor.so
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/auto/pEFL/Ecore/Idler/Idler.so
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/auto/pEFL/Ecore/Mainloop/Mainloop.so
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/auto/pEFL/Ecore/Poller/Poller.so
@@ -32,6 +35,7 @@
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/auto/pEFL/Eina/List/List.so
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/auto/pEFL/Eina/autosplit.ix
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/auto/pEFL/Elm/Actionslider/Actionslider.so
+/opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/auto/pEFL/Elm/App/App.so
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/auto/pEFL/Elm/Bg/Bg.so
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/auto/pEFL/Elm/Box/Box.so
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/auto/pEFL/Elm/Bubble/Bubble.so
@@ -74,6 +78,7 @@
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/auto/pEFL/Elm/Notify/Notify.so
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/auto/pEFL/Elm/Object/Object.so
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/auto/pEFL/Elm/ObjectItem/ObjectItem.so
+/opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/auto/pEFL/Elm/Palette/Palette.so
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/auto/pEFL/Elm/Panel/Panel.so
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/auto/pEFL/Elm/Panes/Panes.so
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/auto/pEFL/Elm/Photo/Photo.so
@@ -140,6 +145,9 @@
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/pEFL/Ecore/Event/SignalUser.pm
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/pEFL/Ecore/EventFilter.pm
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/pEFL/Ecore/EventHandler.pm
+/opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/pEFL/Ecore/FdHandler.pm
+/opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/pEFL/Ecore/File.pm
+/opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/pEFL/Ecore/FileMonitor.pm
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/pEFL/Ecore/Idler.pm
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/pEFL/Ecore/Mainloop.pm
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/pEFL/Ecore/Poller.pm
@@ -160,6 +168,7 @@
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/pEFL/Elm.pm
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/pEFL/Elm/.directory
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/pEFL/Elm/Actionslider.pm
+/opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/pEFL/Elm/App.pm
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/pEFL/Elm/Bg.pm
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/pEFL/Elm/Box.pm
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/pEFL/Elm/Bubble.pm
@@ -201,6 +210,7 @@
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/pEFL/Elm/Notify.pm
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/pEFL/Elm/Object.pm
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/pEFL/Elm/ObjectItem.pm
+/opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/pEFL/Elm/Palette.pm
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/pEFL/Elm/Panel.pm
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/pEFL/Elm/Panes.pm
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/lib/perl5/aarch64-linux/pEFL/Elm/Photo.pm
@@ -276,6 +286,9 @@
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/man/man3/pEFL::Ecore::Event::SignalUser.3
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/man/man3/pEFL::Ecore::EventFilter.3
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/man/man3/pEFL::Ecore::EventHandler.3
+/opt/click.ubuntu.com/pefl.maxperl/current/pEFL/man/man3/pEFL::Ecore::FdHandler.3
+/opt/click.ubuntu.com/pefl.maxperl/current/pEFL/man/man3/pEFL::Ecore::File.3
+/opt/click.ubuntu.com/pefl.maxperl/current/pEFL/man/man3/pEFL::Ecore::FileMonitor.3
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/man/man3/pEFL::Ecore::Idler.3
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/man/man3/pEFL::Ecore::Mainloop.3
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/man/man3/pEFL::Ecore::Poller.3
@@ -295,6 +308,7 @@
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/man/man3/pEFL::Eina::List.3
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/man/man3/pEFL::Elm.3
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/man/man3/pEFL::Elm::Actionslider.3
+/opt/click.ubuntu.com/pefl.maxperl/current/pEFL/man/man3/pEFL::Elm::App.3
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/man/man3/pEFL::Elm::Bg.3
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/man/man3/pEFL::Elm::Box.3
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/man/man3/pEFL::Elm::Bubble.3
@@ -336,6 +350,7 @@
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/man/man3/pEFL::Elm::Notify.3
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/man/man3/pEFL::Elm::Object.3
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/man/man3/pEFL::Elm::ObjectItem.3
+/opt/click.ubuntu.com/pefl.maxperl/current/pEFL/man/man3/pEFL::Elm::Palette.3
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/man/man3/pEFL::Elm::Panel.3
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/man/man3/pEFL::Elm::Panes.3
 /opt/click.ubuntu.com/pefl.maxperl/current/pEFL/man/man3/pEFL::Elm::Photo.3

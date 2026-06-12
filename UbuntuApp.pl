@@ -132,7 +132,7 @@ $nav->show();
 $big_box->show();
 
 $video = _push_video($nav);	
-if (defined($open_file)) {
+if ($open_file) {
 	$video->file_set($open_file);
 	$video->play();
 } 
@@ -290,7 +290,6 @@ sub _push_fs {
 	#my $vkbd = vKbd->new($vbox);
 	#$vbox->pack_end($vkbd->elm_box());
 	
-	#my $fs_edje = $fs->edje_get();
 	my $en1 = $fs->part_content_get("elm.swallow.search");
 	$en1->smart_callback_add("clicked" => \&toggle_keyboard, $vkbd);
 	
@@ -343,6 +342,7 @@ sub _push_video {
 	$player->size_hint_weight_set(EVAS_HINT_EXPAND,EVAS_HINT_EXPAND);
 	$player->content_set($video);
 	$player->smart_callback_add("info,clicked",\&_player_info_cb,$video);
+	$player->smart_callback_add("quality,clicked",\&_player_stop_cb,$video);
 	$player->show();
 
 	my $btn = pEFL::Elm::Button->add($nav);
@@ -352,6 +352,11 @@ sub _push_video {
 	
 	return $video;
 	
+}
+
+sub _player_stop_cb {
+	my ($video, $obj, $event_info) = @_;
+	$video->stop();
 }
 
 sub _player_info_cb {

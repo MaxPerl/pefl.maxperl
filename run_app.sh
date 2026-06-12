@@ -14,6 +14,8 @@ export XDG_CONFIG_HOME="$APP_CONFIG"
 export XDG_DATA_DIRS="$APP_DIR/share:/usr/local/share:/usr/share"
 export ELM_CONFIG_DIR_XDG="/opt/click.ubuntu.com/pefl.maxperl/current/share/elementary/config"
 export XDG_CONFIG_DIRS="$APP_CONFIG:/opt/click.ubuntu.com/pefl.maxperl/current/share/elementary/config:{XDG_CONFIG_DIRS:-}"
+export XDG_RUNTIME_DIR="$APP_CACHE/run"
+export PULSE_RUNTIME_PATH="/run/user/32011/pulse"
 
 export ELM_PREFIX="$APP_DIR"
 export E_PREFIX="$APP_DIR"

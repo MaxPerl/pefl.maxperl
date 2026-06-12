@@ -1,6 +1,111 @@
 --- ./emotion_gstreamer.c	2025-03-17 16:43:43.000000000 +0100
-+++ ./emotion_gstreamer-new.c	2026-06-05 08:12:40.335108706 +0200
-@@ -1552,6 +1552,47 @@
++++ ./emotion_gstreamer-patched.c	2026-06-12 17:35:05.380263810 +0200
+@@ -1238,6 +1238,104 @@
+         goto error_register;
+      }
+ 
++   GstElementFactory *factory;
++   factory = gst_element_factory_find("avdec_h265");
++   if (factory) {
++      gst_plugin_feature_set_rank (GST_PLUGIN_FEATURE (factory), GST_RANK_PRIMARY+100);
++      gst_object_unref (factory);
++   }
++
++   GstElementFactory *factory2;
++   factory2 = gst_element_factory_find("avdec_h264");
++   if (factory2) {
++      gst_plugin_feature_set_rank (GST_PLUGIN_FEATURE (factory2), GST_RANK_PRIMARY+200);
++      gst_object_unref (factory2);
++   }
++
++   GstElementFactory *factory3;
++   factory3 = gst_element_factory_find("avdec_mp3"); 
++   if (factory3) {
++      gst_plugin_feature_set_rank (GST_PLUGIN_FEATURE (factory3), GST_RANK_PRIMARY+200);
++      gst_object_unref (factory3);
++   }
++
++   GstElementFactory *factory4;
++   factory4 = gst_element_factory_find("avdec_mpeg2video"); 
++   if (factory4) {
++      gst_plugin_feature_set_rank (GST_PLUGIN_FEATURE (factory4), GST_RANK_PRIMARY+200);
++      gst_object_unref (factory4);
++   } 
++
++   GstElementFactory *factory5;
++   factory5 = gst_element_factory_find("avdec_mpeg4"); 
++   if (factory5) {
++      gst_plugin_feature_set_rank (GST_PLUGIN_FEATURE (factory5), GST_RANK_PRIMARY+200);
++      gst_object_unref (factory5);
++   }
++
++   GstElementFactory *factory6;
++   factory6 = gst_element_factory_find("avdec_mpegvideo"); 
++   if (factory6) {
++      gst_plugin_feature_set_rank (GST_PLUGIN_FEATURE (factory6), GST_RANK_PRIMARY+200);
++      gst_object_unref (factory6);
++   }
++
++   GstElementFactory *factory7;
++   factory7 = gst_element_factory_find("avdec_vp9"); 
++   if (factory7) {
++      gst_plugin_feature_set_rank (GST_PLUGIN_FEATURE (factory7), GST_RANK_PRIMARY+200);
++      gst_object_unref (factory7);
++   }
++
++   GstElementFactory *factory8;
++   factory8 = gst_element_factory_find("avdec_h263"); 
++   if (factory8) {
++      gst_plugin_feature_set_rank (GST_PLUGIN_FEATURE (factory8), GST_RANK_PRIMARY+200);
++      gst_object_unref (factory8);
++   }
++
++   GstElementFactory *factory9;
++   factory9 = gst_element_factory_find("avdec_h261"); 
++   if (factory9) {
++      gst_plugin_feature_set_rank (GST_PLUGIN_FEATURE (factory9), GST_RANK_PRIMARY+200);
++      gst_object_unref (factory9);
++   }
++
++   GstElementFactory *factory10;
++   factory10 = gst_element_factory_find("avdec_mp3float"); 
++   if (factory10) {
++      gst_plugin_feature_set_rank (GST_PLUGIN_FEATURE (factory10), GST_RANK_PRIMARY+200);
++      gst_object_unref (factory10);
++   }
++
++   GstElementFactory *factory11;
++   factory11 = gst_element_factory_find("avdec_mp2float"); 
++   if (factory11) {
++      gst_plugin_feature_set_rank (GST_PLUGIN_FEATURE (factory11), GST_RANK_PRIMARY+200);
++      gst_object_unref (factory11);
++   }
++
++   GstElementFactory *factory12;
++   factory12 = gst_element_factory_find("avdec_mp1float"); 
++   if (factory12) {
++      gst_plugin_feature_set_rank (GST_PLUGIN_FEATURE (factory12), GST_RANK_PRIMARY+200);
++      gst_object_unref (factory12);
++   }
++
++   GstElementFactory *factory13;
++   factory13 = gst_element_factory_find("avdec_flac"); 
++   if (factory13) {
++      gst_plugin_feature_set_rank (GST_PLUGIN_FEATURE (factory13), GST_RANK_PRIMARY+200);
++      gst_object_unref (factory13);
++   }
++
++   GstElementFactory *factory14;
++   factory14 = gst_element_factory_find("avdec_vp8"); 
++   if (factory14) {
++      gst_plugin_feature_set_rank (GST_PLUGIN_FEATURE (factory14), GST_RANK_PRIMARY+200);
++      gst_object_unref (factory14);
++   }
++
+    _emotion_init_count = 1;
+    return EINA_TRUE;
+ 
+@@ -1552,6 +1650,46 @@
                         }
                    }
  
@@ -34,7 +139,6 @@
 +                                         // Setze das vererbte Property auf der GstBaseSink-Ebene von emotion-sink
 +                                         g_object_set(G_OBJECT(video_sink), "throttle-time", throttle_time, NULL);
 +                                         
-+                                         ERR("Emotion Video-FPS erkannt: %.2f -> throttle-time gesetzt auf %" G_GUINT64_FORMAT " ns", fps, throttle_time);
 +                                      }
 +                                    gst_caps_unref(caps);
 +                                 }
@@ -48,7 +152,7 @@
                  if (n_audio > 0 || n_video > 0)
                    {
                       /** NOTE: you need to set: GST_DEBUG_DUMP_DOT_DIR=/tmp EMOTION_ENGINE=gstreamer to save the $EMOTION_GSTREAMER_DOT file in '/tmp' */
-@@ -1740,6 +1781,19 @@
+@@ -1740,6 +1878,19 @@
     emotion_gstreamer_unref(ev);
  }
  
@@ -68,35 +172,7 @@
  static GstElement *
  _create_pipeline(Emotion_Gstreamer *ev,
                   Evas_Object *o,
-@@ -1753,6 +1807,27 @@
- 
-    if (!uri)
-      return NULL;
-+   
-+   GstElementFactory *factory;
-+   factory = gst_element_factory_find("openh264dec"); // replace with the decoder you want to avoid
-+   if (factory) {
-+      gst_plugin_feature_set_rank (GST_PLUGIN_FEATURE (factory), GST_RANK_PRIMARY+100);
-+      gst_object_unref (factory);
-+   }
-+
-+   GstElementFactory *factory2;
-+   factory2 = gst_element_factory_find("avdec_h264"); // replace with the decoder you want to avoid
-+   if (factory2) {
-+      gst_plugin_feature_set_rank (GST_PLUGIN_FEATURE (factory2), GST_RANK_PRIMARY+200);
-+      gst_object_unref (factory2);
-+   }
-+
-+   GstElementFactory *factory3;
-+   factory3 = gst_element_factory_find("avdec_mp3"); // replace with the decoder you want to avoid
-+   if (factory) {
-+      gst_plugin_feature_set_rank (GST_PLUGIN_FEATURE (factory3), GST_RANK_PRIMARY+200);
-+      gst_object_unref (factory3);
-+   } 
- 
-    playbin = gst_element_factory_make("playbin", "playbin");
-    if (!playbin)
-@@ -1760,6 +1835,46 @@
+@@ -1760,6 +1911,46 @@
          ERR("Unable to create 'playbin' GstElement.");
          return NULL;
       }
@@ -143,7 +219,7 @@
  
     vsink = gst_element_factory_make("emotion-sink", "sink");
     if (!vsink)
-@@ -1767,8 +1882,14 @@
+@@ -1767,8 +1958,14 @@
          ERR("Unable to create 'emotion-sink' GstElement.");
          goto unref_pipeline;
       }
@@ -159,6 +235,7 @@
  
     g_object_get(G_OBJECT(playbin), "flags", &flags, NULL);
     if (ev->spu_mute) flags &= ~GST_PLAY_FLAG_TEXT;
+
 
 --- ./emotion_sink.c	2026-05-31 17:24:41.104995649 +0200
 +++ ./sink_fix.c	2026-06-05 08:32:36.128088540 +0200

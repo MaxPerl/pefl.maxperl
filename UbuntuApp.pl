@@ -56,10 +56,6 @@ if (! -e "$app_cache/imported_files") {
 	make_path("$app_cache/imported_files") or die "Path creation failed: $!\n";
 }
 
-if (! -e "/run/user/32011/.cache/efreet") {
-	make_path("/run/user/32011/.cache/efreet") or die "Path creation failed: $!\n";
-}
-
 my $pid =fork();
 
 if (!defined($pid)) {
